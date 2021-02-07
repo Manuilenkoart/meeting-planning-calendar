@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <title>Calendar</title>
+
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Calendar</h1>
+      <div class="header-right">
+
+        <select id='filter'>
+          <option>All members</option>
+        </select>
+        <button class="new-event"> New Event+</button>
+
+      </div>
+    </div>
+
+    <ul class="calendar">
+      <ul class="time-container">
+        <li class="time time-title">
+          <p>name</p>
+        </li>
+      </ul>
+      <ul class="day-container">
+      </ul>
+    </ul>
+  </div>
+  <div class="overlay-form js-backdrop">
+    <div class="form-content content">
+      <div>
+        <p class="error-message"></p>
+      </div>
+      <button data-action="close-modal">
+        <i class="material-icons toolbar__icon">close</i>
+      </button>
+
+      <form class="form">
+        <label for="eventName">Name of the event:</label>
+        <input type="text" name="eventName" id='eventName' maxlength="15" required>
+
+        <label for="participants">Enter participants separating them with a comma:</label>
+        <input type="text" name="participants" id='participants' required>
+
+        <p>Day:
+          <select name="day" id='formDay'>
+          </select>
+        </p>
+
+        <p>Time:
+          <select name="time" id='formTime'>
+
+          </select>
+        </p>
+
+        <div class="form-btn-container">
+          <button class="form-btn cancel-btn">Cancel</button>
+          <button class="form-btn" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="overlay-del-event js-backdrop">
+    <div class="dev-event-modal content">
+      <h2 class="del-event-title">Are you sure you want to delete "Retrospective" event?</h2>
+      <button class="del-event-btn" id='closeModalEventDel'>No</button>
+      <button class="del-event-btn" id='confirmationEventDel'>Yes</button>
+
+    </div>
+  </div>
+
+</body>
+
+</html>
