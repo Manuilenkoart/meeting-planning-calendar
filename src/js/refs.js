@@ -1,0 +1,15 @@
+export const refs = {
+    timeContainer: document.querySelector('.time-container'),
+    dayTitleContainer: document.querySelector('.day-container'),
+    formDayOption: document.querySelector('#formDay'),
+    formTimeOption: document.querySelector('#formTime'),
+    newEventButton: document.querySelector('.new-event'),
+    closeModal: document.querySelector('button[data-action="close-modal"]'),
+    jsBackdrop: document.querySelector('.js-backdrop'),
+    cancelBtn: document.querySelector('.cancel-btn'),
+    form: document.querySelector('form'),
+    errorMessage: document.querySelector('.error-message'),
+    filterId: document.querySelector('#filter'),
+    closeModalEventDel: document.querySelector('#closeModalEventDel'),
+    confirmationEventDel: document.querySelector('#confirmationEventDel'),
+  };

@@ -1,46 +1,22 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
-import './styles.css';
+import './css/styles.css';
+import {Times,Days} from './js/calendar';
+import {refs} from './js/refs';
+import {setLocalStorage,readLocalStorage} from './js/localStorage'
 import timeMarkup from './templates/timeMarkup.hbs';
 import daysTitleMarkup from './templates/daysTitleMarkup.hbs';
 import fromOption from './templates/formOption.hbs';
 import calendarEvents from './templates/calendarEvents.hbs';
 
-const Times = [
-  '10-00',
-  '11-00',
-  '12-00',
-  '13-00',
-  '14-00',
-  '15-00',
-  '16-00',
-  '17-00',
-  '18-00',
-];
-const Days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 let eventIdToDelete;
 
-const refs = {
-  timeContainer: document.querySelector('.time-container'),
-  dayTitleContainer: document.querySelector('.day-container'),
-  formDayOption: document.querySelector('#formDay'),
-  formTimeOption: document.querySelector('#formTime'),
-  newEventButton: document.querySelector('.new-event'),
-  closeModal: document.querySelector('button[data-action="close-modal"]'),
-  jsBackdrop: document.querySelector('.js-backdrop'),
-  cancelBtn: document.querySelector('.cancel-btn'),
-  form: document.querySelector('form'),
-  errorMessage: document.querySelector('.error-message'),
-  filterId: document.querySelector('#filter'),
-  closeModalEventDel: document.querySelector('#closeModalEventDel'),
-  confirmationEventDel: document.querySelector('#confirmationEventDel'),
-};
 // слушатели собитый
 refs.form.addEventListener('submit', handleSubmitWithFormData);
 refs.newEventButton.addEventListener('click', handleOpenModal);
 refs.closeModalEventDel.addEventListener('click', handleCloseModalEventDel);
 refs.closeModal.addEventListener('click', handleCloseModal);
-refs.cancelBtn.addEventListener('click', handleCloseModal);
+refs.cancelBtn.addEventListener('click', handleCloseModalCancelBtn);
 refs.jsBackdrop.addEventListener('click', handleBackdropClick);
 refs.filterId.addEventListener('click', showFilteredEvents);
 refs.confirmationEventDel.addEventListener('click', confirmationEventDel);
@@ -89,7 +65,6 @@ const renderFormOption = (days, times) => {
 
 const createCalendarEvents = (dayOfWeek, timeOfDay) => {
   // заполнить календарь полями
-  // for (let elDay of dayOfWeek) {
   dayOfWeek.forEach((elDay) => {
     let selectorName = elDay;
     selectorName = document.querySelector(`.${selectorName}`);
@@ -190,17 +165,7 @@ function handleSubmitWithFormData(event) {
 function showformErrorMessage(text) {
   refs.errorMessage.innerText = text;
 }
-// локальное хранилище
 
-function setLocalStorage(newStorage) {
-  localStorage.setItem('events', JSON.stringify(newStorage));
-}
-function readLocalStorage() {
-  const savedSettings = localStorage.getItem('events');
-  const parsedSettings = JSON.parse(savedSettings);
-
-  return parsedSettings;
-}
 
 // управление модальными окнами
 // удаление события
@@ -253,6 +218,12 @@ function handleOpenModal(e) {
   window.addEventListener('keydown', handleKeyPress);
 }
 function handleCloseModal() {
+  const overlay = document.querySelector('.overlay-form');
+  overlay.classList.remove('is-visible');
+  window.removeEventListener('keydown', handleKeyPress);
+}
+function handleCloseModalCancelBtn(e) {
+  e.preventDefault();
   const overlay = document.querySelector('.overlay-form');
   overlay.classList.remove('is-visible');
   window.removeEventListener('keydown', handleKeyPress);

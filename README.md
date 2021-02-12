@@ -4,3 +4,6 @@ Simple meeting planning calendar for a meeting room in your office:
 + Filter meetings for a particular team member;
 + Add new meetings;
 + Delete meetings;
+
+Set available time src/js/calendar Times
+Set available day src/js/calendar Days
